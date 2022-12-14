@@ -37,7 +37,10 @@ app.use(
   })
 );
 app.use(cookieParser());
-app.use(compression());
+app.use(compression({
+    level: 6,
+    threshold: 0,
+  }));
 app.use(
   helmet({
     contentSecurityPolicy: false,
