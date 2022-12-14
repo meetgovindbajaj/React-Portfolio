@@ -28,12 +28,12 @@ router.get("/image", async (req, res) => {
   try {
     const info = await Info.find({}, { image: 1 });
     if (info) {
-      return res.status(200).redirect(`/image/${info[0].image}`);
+      return res.status(200).redirect(`/api/image/${info[0].image}`);
     } else {
-      return res.status(404).redirect("/image/undefined");
+      return res.status(404).redirect("/api/image/undefined");
     }
   } catch (error) {
-    return res.status(500).redirect("/image/undefined");
+    return res.status(500).redirect("/api/image/undefined");
   }
 });
 router.post("/check", async (req, res) => {
