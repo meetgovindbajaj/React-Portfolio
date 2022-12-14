@@ -50,7 +50,7 @@ app.use(morgan("dev"));
 app.use("/api/info", info_router);
 app.use("/api/image", image_router);
 app.use("/api/project", project_router);
-app.get("/", (req, res) => {
+app.use("/", (req, res) => {
   res.send("You Have Opened Govind Bajaj's Server");
 });
 // if (process.env.NODE_ENV == "production") {
