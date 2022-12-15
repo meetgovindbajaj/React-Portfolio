@@ -50,6 +50,9 @@ app.use(
   })
 );
 app.use(morgan("dev"));
+app.get("*",(req,res)=>{
+  res.set("Cache-Control","max-age=5256000")
+})
 app.use("/api/info", info_router);
 app.use("/api/image", image_router);
 app.use("/api/project", project_router);
@@ -65,9 +68,6 @@ app.use("/", (req, res) => {
 // }
 app.use(notFound);
 app.use(errorHandler);
-app.get("*",(req,res)=>{
-  res.set("Cache-Control","public,max-age=5256000,s-maxage=31536000")
-})
 app.listen(PORT, () => {
   p(
     `\n\n[ Node Server ]\n\nUrl\t: http://localhost:${PORT}\nTime\t: ${Time()}\n`
