@@ -50,15 +50,15 @@ app.use(
   })
 );
 app.use(morgan("dev"));
-app.get("*",(req,res)=>{
-  res.set("Cache-Control","max-age=5256000")
-})
 app.use("/api/info", info_router);
 app.use("/api/image", image_router);
 app.use("/api/project", project_router);
 app.use("/", (req, res) => {
   res.send("You Have Opened Govind Bajaj's Server");
 });
+app.get("*",(req,res)=>{
+  res.set("Cache-Control","max-age=5256000")
+})
 // if (process.env.NODE_ENV == "production") {
 //   app.use(express.static("public"));
 //   app.get("*", function (request, response) {
