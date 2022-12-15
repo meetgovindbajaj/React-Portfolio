@@ -65,6 +65,9 @@ app.use("/", (req, res) => {
 // }
 app.use(notFound);
 app.use(errorHandler);
+app.get("*",(req,res)=>{
+  res.set("Cache-Control","public,max-age=5256000,s-maxage=31536000")
+})
 app.listen(PORT, () => {
   p(
     `\n\n[ Node Server ]\n\nUrl\t: http://localhost:${PORT}\nTime\t: ${Time()}\n`
