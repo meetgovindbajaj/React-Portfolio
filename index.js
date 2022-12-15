@@ -50,22 +50,23 @@ app.use(
   })
 );
 app.use(morgan("dev"));
+let setCache = function (req, res, next) {
+  const period = 5256000
+  if (req.method == 'GET') {
+    res.set('Cache-control', `public, max-age=${period}`)
+  } else {
+    res.set('Cache-control', `no-store`)
+  }
+  next()
+}
+app.use(setCache)
 app.use("/api/info", info_router);
 app.use("/api/image", image_router);
 app.use("/api/project", project_router);
 app.use("/", (req, res) => {
   res.send("You Have Opened Govind Bajaj's Server");
 });
-app.get("*",(req,res)=>{
-  res.set("Cache-Control","max-age=5256000")
-})
-// if (process.env.NODE_ENV == "production") {
-//   app.use(express.static("public"));
-//   app.get("*", function (request, response) {
-//     response.set("Cache-Control", "public, max-age=300, s-maxage=600");
-//     response.sendFile(path.resolve(__dirname, "public", "index.html"));
-//   });
-// }
+
 app.use(notFound);
 app.use(errorHandler);
 app.listen(PORT, () => {
