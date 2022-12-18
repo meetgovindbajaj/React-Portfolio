@@ -37,10 +37,7 @@ app.use(
   })
 );
 app.use(cookieParser());
-app.use(compression({
-    level: 6,
-    threshold: 0,
-  }));
+app.use(compression());
 app.use(
   helmet({
     contentSecurityPolicy: false,
@@ -50,16 +47,16 @@ app.use(
   })
 );
 app.use(morgan("dev"));
-let setCache = function (req, res, next) {
-  const period = 5256000
-  if (req.method == 'GET') {
-    res.set('Cache-control', `public, max-age=${period}`)
-  } else {
-    res.set('Cache-control', `no-store`)
-  }
-  next()
-}
-app.use(setCache)
+// let setCache = function (req, res, next) {
+//   const period = 5256000
+//   if (req.method == 'GET') {
+//     res.set('Cache-control', `public, max-age=${period}`)
+//   } else {
+//     res.set('Cache-control', `no-store`)
+//   }
+//   next()
+// }
+// app.use(setCache)
 app.use("/api/info", info_router);
 app.use("/api/image", image_router);
 app.use("/api/project", project_router);
